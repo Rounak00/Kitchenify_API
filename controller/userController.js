@@ -5,7 +5,7 @@ const userController={
       
         try{
          const result= await UserSchema.findByIdAndDelete(req.params.id);
-         res.status(201).send(`User ID ${result} Delted`);
+         res.status(201).send(`User ID ${result} Deleted`);
         }catch(err){
           next(err);
         }

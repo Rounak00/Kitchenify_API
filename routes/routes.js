@@ -1,5 +1,10 @@
 import express from "express";
 const routes= express.Router();
+import {verifyAdmin} from "../middleware/verifyToken.js"
+import loginController from "../controller/auth/loginController.js"
+import registerController from "../controller/auth/registerController.js"
+import productController from "../controller/productController.js"
+import userController from "../controller/userController.js"
 
 
 //auth routes
@@ -12,9 +17,9 @@ routes.get("/user",verifyAdmin,userController.getUsers)
 routes.delete("/user/:id",verifyAdmin,userController.delUser)
 
 //productroutes
-routes.post("/product",productController.addProduct)
-routes.delete("/product/:id",verifyAdmin,productController.delProduct)
-routes.put("/product/:id",verifyAdmin,productController.updateProduct)
+routes.post("/product",productController.addProduct) //add
+routes.delete("/product/:id",verifyAdmin,productController.delProduct) //delete
+routes.put("/product/:id",verifyAdmin,productController.updateProduct) //update 
 routes.get("/product",productController.getProducts)
 routes.get("/product/:id",productController.getProduct)
 
