@@ -10,10 +10,10 @@ import healthCheck from "../controller/healthCheck.js"
 //auth routes
 routes.post("/register", registerController.register)
 routes.post("/login",loginController.login)
-routes.get("/healthCheck",healthCheck)
+routes.get("/healthCheck",healthCheck.healthCheck)
 //User routes
 routes.get("/user/:id",userController.getUser)
-routes.get("/user",verifyAdmin,userController.getUsers)
+routes.get("/users",verifyAdmin,userController.getUsers)
 routes.delete("/user/:id",verifyAdmin,userController.delUser)
 
 //productroutes

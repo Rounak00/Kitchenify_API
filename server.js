@@ -4,7 +4,12 @@ import {PORT} from "./config/config.js"
 import routes from "./routes/routes.js"
 import cookieParser from "cookie-parser"
 import errorHandler from "./middleware/errorHandler.js"
+import path from "path";
+import cors from "cors";
+import bodyParser from "body-parser"
+
 const app=express();
+app.use(cors())
 app.use(express.json());
 
 global.appRoot = path.resolve(__dirname);

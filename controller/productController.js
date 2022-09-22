@@ -4,18 +4,23 @@ import multer from "multer";
 import fs from "fs";
 import path from "path";
 
-const storage=multer.diskStorage({
-  destination: (req,file,cb)=>{cb(null, 'uploads/');},
+// diskStorage
+const storage = multer.diskStorage({
+  // cb is a general function, it's called call back
+destination: (req, file, cb) => cb(null, "uploads/"),
+filename: (req, file, cb) => {
+  // 1660889102382-97732441.png
+  const uniqueName = `${Date.now()} - ${Math.round(
+    Math.random() * 1e9
+  )}${path.extname(file.originalname)}`;
 
-  filename:(req,file,cb)=>{
-    const uniqueName=`${Date.now()} - ${Math.round(math.random()*1e9)}${path.extname(file.originalname)}`;
-    cb(null,uniqueName);
-  },
-})
+      cb(null,uniqueName);
+},
+});
 
-const handleMultiPartData=multer({
+const handleMultipartData = multer({
   storage:storage,
-  limits:{fileSize:100000*5}
+  limits: { fileSize: 1000000*5}
 }).single("image");
 
 const productController={
@@ -24,11 +29,13 @@ const productController={
         if(err){
             return next(customErrorHandler.imageUploadIssue());
         }
-        
+        console.log(req.file);
         const {name, type, price, discountedPrice, companyName} = req.body;
-        const filePath = req.file.path;
+        let filePath;
+        if(req.file){ filePath = req.file.path;}
+       
         try{
-          const newProduct= new ProductSchema({name,type,price,discountedPrice,companyName,image:filepath});
+          const newProduct= new ProductSchema({name,type,price,discountedPrice,companyName,image:filePath});
           const saveData=await newProduct.save();
           res.status(201).json(saveData);
         }catch(err){

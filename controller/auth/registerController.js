@@ -5,12 +5,7 @@ const registerController={
     async register(req,res,next){
         const {name,password,email,address,isAdmin,image}=req.body; 
         
-        try{
-
-            const isExist = await UserSchema.findOne({ email: email });
-			if (!isExist) {
-				return res.status(401).json({ msg: "This Email already in use" });
-			}
+        try{       
              //hashing
         const saltNum = bcrypt.genSaltSync(10);
         const hashPassword = bcrypt.hashSync(password, saltNum)

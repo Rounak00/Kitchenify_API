@@ -6,6 +6,7 @@ import customErrorHandler from "../../services/customErrorHandler.js"
 
 const loginController={
     async login(req,res,next){
+		const {email,password}=req.body;
         try{
             const isExist = await UserSchema.findOne({ email: email });
 			if (!isExist) {
