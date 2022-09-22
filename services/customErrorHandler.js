@@ -15,6 +15,12 @@ class customErrorHandler extends Error{
     static imageUploadIssue(messag="Issue during image upload"){
         return new customErrorHandler(401, messag)
     }
+    static imageDeleteIssue(messag="Issue during image Delete"){
+        return new customErrorHandler(401, messag)
+    }
+    static imageUpdateIssue(messag="Issue during product's image Update"){
+        return new customErrorHandler(401, messag)
+    }
 } 
 
 export default customErrorHandler;
