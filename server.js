@@ -8,7 +8,7 @@ const app=express();
 app.use(express.json());
 
 global.appRoot = path.resolve(__dirname);
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: false })); // come in base 64 which is not supported by rest
 
 app.use(cookieParser());
 app.use(routes);

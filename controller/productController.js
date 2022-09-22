@@ -61,7 +61,7 @@ const productController={
     async updateProduct(req,res,next){
       handelMultipartData(req,res,async(error)=>{
         if (error) {
-           return next(customErrorHandler.imageUpdateIssue)
+           return next(customErrorHandler.imageUpdateIssue());
         }
         const product_id = req.params.id;
         const {name, type, price, discountedPrice, companyName} = req.body;
@@ -77,22 +77,20 @@ const productController={
         }
 
         try {
-            const update = await PostSchema.findByIdAndUpdate(
-                {_id:product_id},
-                {
-                   title,
-                   description,
-                   content,
-                   tags,
-                    ...(req.file && {thumbnail:filepath}),
-                },
-                {new:true}
-            );
-            res.status(200).json({msg:"User updated Successfully"});
-        } catch (error) {
-            next(error);
+           const newData=await ProductSchema.findByIdAndUpdate(
+            {_id:product_id},{
+              name:name,
+              type:type, 
+              price:price, 
+              discpountedPrice:discountedPrice, 
+              companyName:companyName,
+                  ...(req.file && {image:filepath}),
+            },{new:true}
+           );
+           res.status(200).json(newData);
+        }catch(err){
+          next(err);
         }
-
     });
 },
 async getProducts(req,res,next){
