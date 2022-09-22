@@ -1,4 +1,4 @@
-import { JWT_Secret } from "../config/config";
+import { JWT_Secret } from "../config/config.js";
 import jwt from "jsonwebtoken"
 
 export const verifyToken=(req,res,next)=>{

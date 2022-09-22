@@ -6,6 +6,10 @@ import cookieParser from "cookie-parser"
 import errorHandler from "./middleware/errorHandler.js"
 const app=express();
 app.use(express.json());
+
+global.appRoot = path.resolve(__dirname);
+app.use(bodyParser.urlencoded({ extended: false }));
+
 app.use(cookieParser());
 app.use(routes);
 app.use(errorHandler);

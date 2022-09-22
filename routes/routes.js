@@ -5,12 +5,12 @@ import loginController from "../controller/auth/loginController.js"
 import registerController from "../controller/auth/registerController.js"
 import productController from "../controller/productController.js"
 import userController from "../controller/userController.js"
-
+import healthCheck from "../controller/healthCheck.js"
 
 //auth routes
 routes.post("/register", registerController.register)
 routes.post("/login",loginController.login)
-
+routes.get("/healthCheck",healthCheck)
 //User routes
 routes.get("/user/:id",userController.getUser)
 routes.get("/user",verifyAdmin,userController.getUsers)
