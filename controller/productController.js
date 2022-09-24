@@ -66,7 +66,7 @@ const productController={
     })
     },
     async updateProduct(req,res,next){
-      handelMultipartData(req,res,async(error)=>{
+      handleMultipartData(req,res,async(error)=>{
         if (error) {
            return next(customErrorHandler.imageUpdateIssue());
         }
@@ -75,7 +75,7 @@ const productController={
         let filepath;
 
         if (req.file) {
-            const data = await ProductSchema.findById({_id:prod_id});
+            const data = await ProductSchema.findById({_id:product_id});
             fs.unlink(`${appRoot}/${data.image}`,(error)=>{
                 console.log("image deleted");
             });
